@@ -1,13 +1,3 @@
-% Yuan=[300 311;390 425; 312 321; 250 185; 550 535; 420 432; 410 520;];
-% b=bar(Yuan);
-% grid on;
-% 
-% ch = get(b,'children');
-% set(gca,'XTickLabel',{'0','1','2','3','4','5','6'})
-% set(ch,'FaceVertexCData',[1 0 1;0 0 0;])
-
-
-
 clc
 clear
 
@@ -54,7 +44,7 @@ Dollar=coeffs(Dollar);
 Dollar=Dollar(2:1001)
 
 
-
+%欧元
 Euro1=1/(1-x);
 Euro1=series(Euro1,x,'Order',1001);     %1欧分 -> 母函数
 Euro2=1/(1-x^2);
@@ -72,24 +62,38 @@ Euro7=series(Euro7,x,'Order',1001);     %一欧元 -> 母函数
 Euro8=1/(1-x^200);
 Euro8=series(Euro8,x,'Order',1001);     %二欧元 -> 母函数
 
-% Euro=Euro1*Euro2*Euro3*Euro4*Euro5*Euro6*Euro7*Euro8;
-% expand(Euro);
-% Euro=coeffs(Euro);
-% Euro=Euro(2:1001)
+Euro=Euro1*Euro2*Euro3*Euro4*Euro5*Euro6*Euro7*Euro8;
+expand(Euro);
+Euro=coeffs(Euro);
+Euro=Euro(2:1001)
 
-% Yuanx=1:1:1000;
-% plot(Yuanx,Yuan)
-% hold on;
-% Dollarx=1:1000;
-% plot(Dollarx,Dollar)
-% Eurox=1:1000;
-% plot(Eurox,Euro)
-% 
-% legend('人民币','美元','欧元');
-% xlabel('分');
-% ylabel('组合数');
+%绘制函数图像
+Yuanx=1:1:1000;
+plot(Yuanx,Yuan)
+hold on;
+Dollarx=1:1000;
+plot(Dollarx,Dollar)
+Eurox=1:1000;
+plot(Eurox,Euro)
+
+legend('人民币','美元','欧元');
+xlabel('分');
+ylabel('组合数');
 
 figure 
-bar(Yuan)
-hold on 
-bar(Dollar)
+
+%绘制柱状图
+Combine=zeros(3,10);
+for row=100:100:1000
+    Combine(1,row/100)=Yuan(row);
+    Combine(2,row/100)=Dollar(row);
+    Combine(3,row/100)=Euro(row);
+end
+Combine=Combine';
+
+bar(Combine)
+set(gca,'ygrid','on');      %只显示网格的横线 
+set(gca,'xticklabel',{'100','200','300','400','500','600','700','800','900','1000'});
+legend('人民币','美元','欧元');
+xlabel('分');
+ylabel('组合数');
