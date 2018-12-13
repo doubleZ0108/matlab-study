@@ -43,3 +43,13 @@ hold off
 
 
 %两信号的合成
+t=0:0.01:5;
+f=exp(-2*t);
+g=0.5*sin(4*pi*t);
+h=f+g;
+k=f.*g;
+
+subplot(2,2,1);plot(t,f);
+subplot(2,2,2);plot(t,g);
+subplot(2,2,3);plot(t,h);
+subplot(2,2,4);plot(t,k);
