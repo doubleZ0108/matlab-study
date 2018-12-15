@@ -1,0 +1,1 @@
+1. mcc -m xxx.m	%在当前目录生成xxx.exe程序
