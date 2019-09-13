@@ -16,6 +16,11 @@ eq3 = y3 == a*x3^2 + b*x3 + c;
 
 [a,b,c] = solve(eq1,eq2,eq2, a,b,c);        % 注意参数的顺序
 
+% 如果解出的解有 round(z)..., 要将结果强制转化为double
+a = double(a);
+b = double(b);
+c = double(c);
+
 y = a*x^2 + b*x + c;
 figure;
 
