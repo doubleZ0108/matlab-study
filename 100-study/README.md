@@ -178,4 +178,19 @@ map.ColorVariable = 'zone';
   xlswrite(filename, data);
   ```
 
-  
+
+### writematrix
+
+
+```matlab
+writematrix(M, 'data.txt', 'Delimiter', 'tab')
+
+writematrix(M, 'data.xls', 'Sheet', 2, 'Range', 'A3:E8')
+```
+
+- **文件格式**: `.txt`, `.csv`, '.xls', `.xlsx`
+- **参数**：
+  - `Delimiter`: ',', ' ', '\t', ';', '|'
+  - `Encoding`: 'UTF-8', ...
+  - `Sheet`: 工作表名称或正整数
+
