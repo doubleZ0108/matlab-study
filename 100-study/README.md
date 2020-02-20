@@ -69,7 +69,8 @@
   colorbar('YTickLabel',{'Freezing','Cold','Cool','Neutral','Warm','Hot','Burning','Nuclear'});		% 设置色标的刻度名字
   
   % 设置位置
-  colorbar('location', 'SouthOutside');
+  colorbar(
+  美赛文档 02170925);
   colorbar('location', 'East');
   colorbar('position', [0.94 0.1 0.02 0.8]);
   ```
@@ -95,6 +96,15 @@
 
 - **等高线图**：`contourf(x,y,z);`
 
+- **设置figure大小**：
+
+  ```matlab
+  fig = figure;
+  set(fig,'position',[100 100 1200 500]);
+  ```
+
+  
+
 
 
 ### 地图
@@ -107,6 +117,34 @@ geoshow(ax, land);	%展示地图
 
 - 绘制点：`plotm(lat,lon,'Marker','.');`
 - 绘制面片：`surfm(lat:lat+1,lon:lon+1, 1);`
+
+### geobubble
+
+```matlab
+map = geobubble(dataTable,'Lat','Lon','SizeVariable','data');
+map.BubbleWidthRange = [5, 100]
+```
+
+- `dataTable`：table类型的数据
+- `Lat`：这一列指定精度
+- `Lon`: 这一列指定维度
+- `data`: 为要显示圈圈的数据
+
+<img src="https://pic3.zhimg.com/80/v2-e90b6b661abe87fe10dd135e20e7642a_hd.jpg" alt="img" style="zoom:33%;" />
+
+用颜色表示另一维度的数据
+
+```matlab
+tempZone = discretize(dataTable.temp,[-inf,10.5,15,inf],'categorical',{'cold','normal','hot'});
+% 更新table
+gdpTable.zone = tempZone;
+
+% 更新map
+map.SourceTable = gdpTable;
+map.ColorVariable = 'zone';
+```
+
+<img src="https://pic1.zhimg.com/80/v2-9830985f942fbff261eb14a9af2c755c_hd.jpg" alt="img" style="zoom:33%;" />
 
 ------
 
